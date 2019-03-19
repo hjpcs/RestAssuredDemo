@@ -32,6 +32,7 @@ public class DepartmentTest {
 
     @Test
     void create(){
-        department.create("hjp", "14");
+        department.create("hjp", "14")
+                .then().body("errcode", equalTo(60008));
     }
 }
