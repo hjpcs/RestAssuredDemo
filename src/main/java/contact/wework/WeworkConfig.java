@@ -2,10 +2,10 @@ package contact.wework;
 
 public class WeworkConfig {
 
-    public String agentId="1000005";
-    public String secret="1JPyY9GvPLZfpvxEDjok-Xt_9v7HIBYJhZUoO6EgNGY";
-    public String corpid="wwd6da61649bd66fea";
-    public String contactSecret="C7uGOrNyxWWzwBsUyWEbLQdOqoWPz4hNvxj9RIFv-4U";
+    public String agentId="1000002";
+    public String secret="SeVKA2FS1xhMi-Jp-MMcinlD1iUZb_ucK1UeknelefI";
+    public String corpid="wwd0f5cc0224c77f7d";
+    public String contactSecret="gjK120EL_7LOVbazAuc70cmwU4krR-PV-fb5wqR58ss";
 
     //单例模式
     private static WeworkConfig weworkConfig;

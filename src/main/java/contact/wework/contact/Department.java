@@ -15,4 +15,16 @@ public class Department {
         .then().log().all().statusCode(200).extract().response();
 
     }
+
+    public Response create(String name, String parentid){
+        return given().log().all()
+                .queryParam("access_token", Wework.getToken())
+                .body("{\n" +
+                        "   \"name\": \"" + name + "\",\n" +
+                        "   \"parentid\": " + parentid + ",\n" +
+                        "   \"order\": 1,\n" +
+                        "}")
+        .when().post("https://qyapi.weixin.qq.com/cgi-bin/department/create")
+        .then().log().all().statusCode(200).extract().response();
+    }
 }

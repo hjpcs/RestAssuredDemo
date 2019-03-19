@@ -1,3 +1,4 @@
+import contact.wework.WeworkConfig;
 import org.junit.jupiter.api.Test;
 import contact.wework.Wework;
 
@@ -10,7 +11,7 @@ public class TestGetToken {
     @Test
     public void testToken(){
         Wework wework = new Wework();
-        String token = wework.getWeworkToken();
+        String token = wework.getWeworkToken(WeworkConfig.getInstance().secret);
         assertThat(token, not(equalTo(null)));
     }
 }
