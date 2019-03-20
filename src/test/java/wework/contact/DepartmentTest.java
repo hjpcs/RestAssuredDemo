@@ -9,6 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class DepartmentTest {
 
     Department department;
+    String random = String.valueOf(System.currentTimeMillis());
     @BeforeEach
     void setUp(){
         if (department == null) {
@@ -32,7 +33,34 @@ public class DepartmentTest {
 
     @Test
     void create(){
-        department.create("hjp", "14")
+        department.create("hjp", "14", "15")
                 .then().body("errcode", equalTo(60008));
     }
+
+    @Test
+    void createWithChinese(){
+        department.create("何金鹏"+random, "14", "20")
+                .then().body("errcode", equalTo(0));
+    }
+
+    @Test
+    void delete(){
+        String oldName = "zp";
+        department.create(oldName, "14", "17");
+        String id = String.valueOf(department.list("")
+                .path("department.find{it.name=='"+ oldName +"'}.id"));
+        department.delete(id).then().body("errcode", equalTo(0));
+    }
+
+    @Test
+    void update(){
+        String oldName = "zp";
+        String oldId = "16";
+        department.delete(oldId);
+        department.create(oldName, "14", oldId);
+        String id = String.valueOf(department.list("")
+                .path("department.find{it.name=='"+ oldName +"'}.id"));
+        department.update("zpa", id).then().body("errcode", equalTo(0));
+    }
+
 }
