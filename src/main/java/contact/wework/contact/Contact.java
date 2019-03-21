@@ -7,6 +7,7 @@ import io.restassured.http.ContentType;
 import static io.restassured.RestAssured.given;
 
 public class Contact extends Restful {
+    public String random = String.valueOf(System.currentTimeMillis());
     public Contact(){
         reset();
     }

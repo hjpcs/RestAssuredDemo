@@ -4,6 +4,8 @@ import contact.wework.contact.Department;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+
 import static org.hamcrest.Matchers.equalTo;
 
 public class DepartmentTest {
@@ -38,6 +40,16 @@ public class DepartmentTest {
         department.create("hjp"+random, "14")
                 .then().body("errcode", equalTo(0));
 
+    }
+
+    @Test
+    void createByMap(){
+        HashMap<String, Object> map = new HashMap<String, Object>(){{
+            put("name", "hjp_map"+random);
+            put("parentid", "14");
+
+        }};
+        department.create(map).then().body("errcode", equalTo(0));
     }
 
     @Test
