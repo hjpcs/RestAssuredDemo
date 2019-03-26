@@ -3,6 +3,8 @@ package wework.contact;
 import contact.wework.contact.Member;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,15 +29,18 @@ public class MemberTest {
         member.get("HeJinPeng").then().log().all().statusCode(200);
     }
 
-    @Test
-    void create(){
+    @ParameterizedTest
+    @ValueSource(strings = {"hjp_", "zp_", "love_"})
+    void create(String name){
+        String nameNew = name + member.random;
+        String random = String.valueOf(System.currentTimeMillis()).substring(5+0, 5+8);
         HashMap<String, Object> map = new HashMap<>();
-        map.put("userid", "hjp_"+member.random);
-        map.put("name", "hjp_"+member.random);
-        map.put("alias", "hjp_"+member.random);
+        map.put("userid", nameNew);
+        map.put("name", nameNew);
+        map.put("alias", nameNew);
         map.put("department", Arrays.asList(1, 2));
-        map.put("mobile", "151"+member.random.substring(0, 8));
-        map.put("email", member.random.substring(0, 8) + "@qq.com");
+        map.put("mobile", "151" + random);
+        map.put("email", random + "@qq.com");
         member.create(map).then().statusCode(200).body("errcode", equalTo(0));
     }
 }

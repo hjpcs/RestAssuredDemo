@@ -16,6 +16,7 @@ public class DepartmentTest {
     void setUp(){
         if (department == null) {
             department = new Department();
+            department.deleteAll();
         }
     }
 
@@ -37,7 +38,7 @@ public class DepartmentTest {
 
     @Test
     void create(){
-        department.create("hjp"+random, "14")
+        department.create("hjp"+random, "1")
                 .then().body("errcode", equalTo(0));
 
     }
@@ -46,7 +47,7 @@ public class DepartmentTest {
     void createByMap(){
         HashMap<String, Object> map = new HashMap<String, Object>(){{
             put("name", "hjp_map"+random);
-            put("parentid", "14");
+            put("parentid", "1");
 
         }};
         department.create(map).then().body("errcode", equalTo(0));
@@ -54,14 +55,14 @@ public class DepartmentTest {
 
     @Test
     void createWithChinese(){
-        department.create("何金鹏"+random, "14")
+        department.create("何金鹏"+random, "1")
                 .then().body("errcode", equalTo(0));
     }
 
     @Test
     void delete(){
         String oldName = "hjp"+random;
-        department.create(oldName, "14");
+        department.create(oldName, "1");
         Integer idInt = department.list("")
                 .path("department.find{it.name=='"+ oldName +"'}.id");
         System.out.println(idInt);
@@ -72,13 +73,23 @@ public class DepartmentTest {
     @Test
     void update(){
         String oldName = "hjp"+random;
-        department.create(oldName, "14");
+        department.create(oldName, "1");
         Integer idInt = department.list("")
                 .path("department.find{it.name=='"+ oldName +"'}.id");
         System.out.println(idInt);
         String id = String.valueOf(idInt);
-        department.update("hjpa"+random, id).then().body("errcode", equalTo(0));
+        department.update("hjpa"+random, id).then().log().all().body("errcode", equalTo(0));
         department.delete(id).then().body("errcode", equalTo(0));
     }
 
+    @Test
+    void deleteAll(){
+        department.deleteAll();
+    }
+
+    @Test
+    void updateAll(){
+        HashMap<String, Object> map = new HashMap<>();
+        department.api("api.json", map).then().statusCode(200);
+    }
 }
