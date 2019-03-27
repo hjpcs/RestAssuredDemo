@@ -3,6 +3,8 @@ package wework.contact;
 import contact.wework.contact.Department;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.util.HashMap;
 
@@ -59,6 +61,13 @@ public class DepartmentTest {
                 .then().body("errcode", equalTo(0));
     }
 
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data/createWithDup.csv")
+    void createWithDup(String name, Integer expectCode){
+        department.create(name + random, "1").then().body("errcode", equalTo(0));
+        department.create(name + random, "1").then().body("errcode", equalTo(expectCode));
+    }
+
     @Test
     void delete(){
         String oldName = "hjp"+random;
@@ -89,6 +98,7 @@ public class DepartmentTest {
 
     @Test
     void updateAll(){
+        //todo:
         HashMap<String, Object> map = new HashMap<>();
         department.api("api.json", map).then().statusCode(200);
     }
