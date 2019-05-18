@@ -96,10 +96,10 @@ public class DepartmentTest {
         department.deleteAll();
     }
 
-    @Test
+    /*@Test
     void updateAll(){
         //todo:
         HashMap<String, Object> map = new HashMap<>();
         department.api("api.json", map).then().statusCode(200);
-    }
+    }*/
 }
