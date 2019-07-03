@@ -1,11 +1,12 @@
 package wework.contact;
 
 import contact.wework.contact.Department;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
+import data.DataSource;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -14,7 +15,7 @@ public class DepartmentTest {
 
     Department department;
     String random = String.valueOf(System.currentTimeMillis());
-    @BeforeEach
+    @BeforeMethod
     void setUp(){
         if (department == null) {
             department = new Department();
@@ -61,8 +62,14 @@ public class DepartmentTest {
                 .then().body("errcode", equalTo(0));
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/data/createWithDup.csv")
+    @DataProvider
+    public Object[][] dataProvider(Method method) {
+        DataSource data = new DataSource();
+        Object[][] obj = data.dataSource().get(method.getName());
+        return obj;
+    }
+
+    @Test(dataProvider = "dataProvider")
     void createWithDup(String name, Integer expectCode){
         department.create(name + random, "1").then().body("errcode", equalTo(0));
         department.create(name + random, "1").then().body("errcode", equalTo(expectCode));

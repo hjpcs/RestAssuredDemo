@@ -7,14 +7,19 @@
     <groupId>hjpcs.top</groupId>
     <artifactId>RestAssuredDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -22,6 +27,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20</version>
                 <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
                         <include>**/**.java</include>
@@ -31,12 +39,12 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.7.201606060606</version>
+                <version>0.8.3</version>
                 <configuration>
                     <!--指定生成 .exec 文件的存放位置-->
-                    <destFile>target/jacoco-unit.exec</destFile>
+                    <destFile>target/jacoco.exec</destFile>
                     <!--Jacoco 是根据 .exec 文件生成最终的报告，所以需指定 .exec 的存放路径-->
-                    <dataFile>target/jacoco-unit.exec</dataFile>
+                    <dataFile>target/jacoco.exec</dataFile>
                 </configuration>
                 <executions>
                     <execution>
@@ -82,6 +90,19 @@
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <version>2.4.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.5.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.14.3</version>
+            <scope>test</scope>
         </dependency>
         <!--<dependency>
             <groupId>junit</groupId>

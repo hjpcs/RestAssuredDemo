@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="rest-assured-demo">
+    <test name="接口测试">
+        <classes>
+            <class name="Baidu" />
+            <class name="TestGetToken" />
+            <class name="Xueqiu" />
+            <class name="wework.contact.DepartmentTest" />
+            <class name="wework.contact.MemberTest" />
+        </classes>
+    </test>
+</suite>

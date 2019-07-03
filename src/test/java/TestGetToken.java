@@ -1,6 +1,6 @@
-import contact.wework.WeworkConfig;
-import org.junit.jupiter.api.Test;
 import contact.wework.Wework;
+import contact.wework.WeworkConfig;
+import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

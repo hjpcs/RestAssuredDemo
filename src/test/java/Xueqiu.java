@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.useRelaxedHTTPSValidation;
@@ -15,7 +15,7 @@ public class Xueqiu {
                 //query请求
                 .queryParam("code", "sogo")
                 //头信息
-                .header("Cookie", "aliyungf_tc=AQAAAMdhGTUf8QgAElvsc3grxnPSF5m3; xq_a_token=6793401481303b0b4078c00acf521f116693ab76; xq_a_token.sig=kn3AtIz_AxxI0iAzWFBkTMIOFfQ; xq_r_token=e5e64b239ced9de9b2e1d1b37182159946e08cf0; xq_r_token.sig=Qc9zNevVZNNCDpgFt-leV4WiA0E; _ga=GA1.2.718969568.1554960309; _gid=GA1.2.1210320271.1554960309; _gat=1; u=821554960309551; device_id=9482158d2d2471950017f150a0d1e794; Hm_lvt_1db88642e346389874251b5a1eded6e3=1554960309,1554960351; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1554960351")
+                .header("Cookie", "aliyungf_tc=AQAAAI0f7QOB3gkAD1vsc/k2+728NllT; s=br1awx45pc; xq_a_token=a372422d9868382896fce9d09a2dc00226e07c79; xq_r_token=274f931308c1541849da32315243b9f5bef6965d; u=111562133316694; Hm_lvt_1db88642e346389874251b5a1eded6e3=1562133317; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1562133317; device_id=4a0dfbe58f7cbf2576d61626a9aa01c1")
         //表示触发条件
         .when()
                 .get("https://xueqiu.com/stock/search.json")

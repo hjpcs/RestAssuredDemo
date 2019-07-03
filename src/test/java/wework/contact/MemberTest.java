@@ -1,12 +1,12 @@
 package wework.contact;
 
 import contact.wework.contact.Member;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import data.DataSource;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -16,7 +16,7 @@ public class MemberTest {
 
     static Member member;
     //String random = String.valueOf(System.currentTimeMillis());
-    @BeforeAll
+    @BeforeClass
     static void setUp(){
         if (member == null) {
             member = new Member();
@@ -30,9 +30,15 @@ public class MemberTest {
         member.get("HeJinPeng").then().log().all().statusCode(200);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"hjp_", "zp_", "love_"})
-    void create(String name){
+    @DataProvider
+    public Object[][] dataProvider(Method method) {
+        DataSource data = new DataSource();
+        Object[][] obj = data.dataSource().get(method.getName());
+        return obj;
+    }
+
+    @Test(dataProvider = "dataProvider")
+    void memberCreate(String name){
         String nameNew = name + member.random;
         String random = String.valueOf(System.currentTimeMillis()).substring(5+0, 5+8);
         HashMap<String, Object> map = new HashMap<>();
@@ -45,9 +51,8 @@ public class MemberTest {
         member.create(map).then().statusCode(200).body("errcode", equalTo(0));
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/data/members.csv")
-    void create(String name, String alias){
+    @Test(dataProvider = "dataProvider")
+    void memberCreateWithAlias(String name, String alias){
         String nameNew = name + member.random;
         String random = String.valueOf(System.currentTimeMillis()).substring(5+0, 5+8);
         HashMap<String, Object> map = new HashMap<>();
