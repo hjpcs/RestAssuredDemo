@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+RestAssuredDemo,contact.wework,Restful,130,35,0,0,23,9,8,3,8,3
+RestAssuredDemo,contact.wework,Wework,0,53,0,2,0,10,0,4,0,3
+RestAssuredDemo,contact.wework,WeworkConfig,1,23,0,2,1,8,1,3,1,2
+RestAssuredDemo,contact.wework.contact,Tag,3,0,0,0,1,0,1,0,1,0
+RestAssuredDemo,contact.wework.contact,Contact,0,36,0,0,0,11,0,3,0,3
+RestAssuredDemo,contact.wework.contact,Member,0,54,0,0,0,13,0,3,0,3
+RestAssuredDemo,contact.wework.contact,Department,11,199,0,0,2,45,2,9,2,9

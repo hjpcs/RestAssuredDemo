@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Restful.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RestAssuredDemo</a> &gt; <a href="index.source.html" class="el_package">contact.wework</a> &gt; <span class="el_source">Restful.java</span></div><h1>Restful.java</h1><pre class="source lang-java linenums">package contact.wework;
+
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+import java.util.HashMap;
+
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.responseSpecification;
+
+<span class="fc" id="L13">public class Restful {</span>
+<span class="fc" id="L14">    HashMap&lt;String, Object&gt; query = new HashMap&lt;String, Object&gt;();</span>
+<span class="fc" id="L15">    public RequestSpecification requestSpecification = given();</span>
+    public Response send(){
+<span class="nc" id="L17">        requestSpecification = given().log().all();</span>
+<span class="nc" id="L18">        query.entrySet().forEach( entry-&gt; {</span>
+<span class="nc" id="L19">            requestSpecification.queryParam(entry.getKey(), entry.getValue());</span>
+<span class="nc" id="L20">        });</span>
+<span class="nc" id="L21">        return responseSpecification.when().request(&quot;get&quot;, &quot;baidu.com&quot;);</span>
+    }
+
+    public static String template(String path, HashMap&lt;String, Object&gt; map){
+<span class="fc" id="L25">        DocumentContext documentContext = JsonPath.parse(Restful.class</span>
+<span class="fc" id="L26">                .getResourceAsStream(path));</span>
+<span class="fc" id="L27">        map.entrySet().forEach(entry-&gt;{</span>
+<span class="fc" id="L28">            documentContext.set(entry.getKey(), entry.getValue());</span>
+<span class="fc" id="L29">        });</span>
+<span class="fc" id="L30">        return documentContext.jsonString();</span>
+    }
+
+    public Response templateFromHar(String path, String pattern, HashMap&lt;String, Object&gt; map){
+        //todo:支持从har自动生成接口定义并发送
+        //从har中读取请求，进行更新
+<span class="nc" id="L36">        DocumentContext documentContext = JsonPath.parse(Restful.class</span>
+<span class="nc" id="L37">                .getResourceAsStream(path));</span>
+<span class="nc" id="L38">        map.entrySet().forEach(entry-&gt;{</span>
+<span class="nc" id="L39">            documentContext.set(entry.getKey(), entry.getValue());</span>
+<span class="nc" id="L40">        });</span>
+
+<span class="nc" id="L42">        String method = documentContext.read(&quot;method&quot;);</span>
+<span class="nc" id="L43">        String url = documentContext.read(&quot;url&quot;);</span>
+<span class="nc" id="L44">        return requestSpecification.when().request(method, url);</span>
+    }
+
+    public Response templateFromSwagger(String path, String pattern, HashMap&lt;String, Object&gt; map){
+        //todo:支持从swagger自动生成接口定义并发送
+        //从swagger中读取请求，进行更新
+<span class="nc" id="L50">        DocumentContext documentContext = JsonPath.parse(Restful.class</span>
+<span class="nc" id="L51">                .getResourceAsStream(path));</span>
+<span class="nc" id="L52">        map.entrySet().forEach(entry-&gt;{</span>
+<span class="nc" id="L53">            documentContext.set(entry.getKey(), entry.getValue());</span>
+<span class="nc" id="L54">        });</span>
+
+<span class="nc" id="L56">        String method = documentContext.read(&quot;method&quot;);</span>
+<span class="nc" id="L57">        String url = documentContext.read(&quot;url&quot;);</span>
+<span class="nc" id="L58">        return requestSpecification.when().request(method, url);</span>
+    }
+
+    public Response templateFromYaml(String path, HashMap&lt;String, Object&gt; map){
+        //todo:根据yaml生成接口定义并发送
+<span class="nc" id="L63">        return null;</span>
+    }
+
+    //todo:支持wsdl soap
+
+    public Response api(String path, HashMap&lt;String, Object&gt; map){
+        //todo:动态调用
+<span class="nc" id="L70">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

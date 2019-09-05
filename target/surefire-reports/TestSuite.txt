@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 21, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 13.335 s <<< FAILURE! - in TestSuite
+testSearch(Xueqiu)  Time elapsed: 0.309 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <200> but was <400>.
+
+	at Xueqiu.testSearch(Xueqiu.java:26)
+

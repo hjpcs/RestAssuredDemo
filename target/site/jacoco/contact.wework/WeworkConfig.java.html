@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WeworkConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RestAssuredDemo</a> &gt; <a href="index.source.html" class="el_package">contact.wework</a> &gt; <span class="el_source">WeworkConfig.java</span></div><h1>WeworkConfig.java</h1><pre class="source lang-java linenums">package contact.wework;
+
+<span class="fc" id="L3">public class WeworkConfig {</span>
+
+<span class="fc" id="L5">    public String agentId=&quot;1000002&quot;;</span>
+<span class="fc" id="L6">    public String secret=&quot;SeVKA2FS1xhMi-Jp-MMcinlD1iUZb_ucK1UeknelefI&quot;;</span>
+<span class="fc" id="L7">    public String corpid=&quot;wwd0f5cc0224c77f7d&quot;;</span>
+<span class="fc" id="L8">    public String contactSecret=&quot;gjK120EL_7LOVbazAuc70cmwU4krR-PV-fb5wqR58ss&quot;;</span>
+
+    //单例模式
+    private static WeworkConfig weworkConfig;
+    public static WeworkConfig getInstance(){
+<span class="fc bfc" id="L13" title="All 2 branches covered.">        if (weworkConfig == null)</span>
+<span class="fc" id="L14">            weworkConfig = new WeworkConfig();</span>
+<span class="fc" id="L15">        return weworkConfig;</span>
+    }
+
+    public static void load(String path){
+        //todo:read from yaml or json
+<span class="nc" id="L20">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

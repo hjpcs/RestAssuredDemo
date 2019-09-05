@@ -7,8 +7,8 @@ public class WeworkConfig {
     public String corpid="wwd0f5cc0224c77f7d";
     public String contactSecret="gjK120EL_7LOVbazAuc70cmwU4krR-PV-fb5wqR58ss";
 
-    //单例模式
-    private static WeworkConfig weworkConfig;
+    //懒汉单例模式
+    private static WeworkConfig weworkConfig = null;
     public static WeworkConfig getInstance(){
         if (weworkConfig == null)
             weworkConfig = new WeworkConfig();

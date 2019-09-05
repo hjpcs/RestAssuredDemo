@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Wework.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RestAssuredDemo</a> &gt; <a href="index.source.html" class="el_package">contact.wework</a> &gt; <span class="el_source">Wework.java</span></div><h1>Wework.java</h1><pre class="source lang-java linenums">package contact.wework;
+
+import io.restassured.RestAssured;
+
+<span class="fc" id="L5">public class Wework {</span>
+
+    private static String token;
+
+    public static String getWeworkToken(String secret){
+<span class="fc" id="L10">        return RestAssured.given().log().all()</span>
+<span class="fc" id="L11">                .queryParam(&quot;corpid&quot;, WeworkConfig.getInstance().corpid)</span>
+<span class="fc" id="L12">                .queryParam(&quot;corpsecret&quot;, secret)</span>
+<span class="fc" id="L13">                .when().get(&quot;https://qyapi.weixin.qq.com/cgi-bin/gettoken&quot;)</span>
+<span class="fc" id="L14">                .then().log().all().statusCode(200)</span>
+<span class="fc" id="L15">                .extract().path(&quot;access_token&quot;);</span>
+    }
+
+    /*public static String getWeworkTokenForContact(){
+
+    }*/
+
+    public static String getToken(){
+        //todo:支持两种类型的token
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (token == null){</span>
+<span class="fc" id="L25">            token = getWeworkToken(WeworkConfig.getInstance().contactSecret);</span>
+        }
+<span class="fc" id="L27">        return token;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
